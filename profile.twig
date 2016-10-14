@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ theme_url }}/components/image.min.css" type="text/css" />
+{% endblock %}
+
+{% block main_content %}
+    {% for page in pages if page.title %}
+        <img class="ui tiny left floated circular image" src="{{ base_url }}/assets/{{ page.author }}.jpg">
+        <h2 class="ui header">
+            {{ page.meta['name'] }}{% if page.meta['job'] is defined %}
+                <div class="ui sub header">{{ page.meta['job'] }}</div>
+            {% endif %}
+        </h2>
+        {{ page.id|content|length > 500 ? page.id|content|slice(0, 500) ~ '...' : page.id|content }}
+        <div class="ui mini {{ config.semantic_color }} label"><a href="{{ page.url }}">READ MORE</a></div>
+	    <div class="ui hidden divider"></div>
+    {% endfor %}
+{% endblock %}

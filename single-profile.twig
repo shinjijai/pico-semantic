@@ -1,0 +1,52 @@
+{% extends "base.twig" %}
+{% block css %}
+	<link rel="stylesheet" href="{{ theme_url }}/components/image.min.css" type="text/css" />
+{% endblock %}
+{% block main_content %}
+    <img class="ui small left floated circular image" src="{{ base_url }}/assets/{{ meta.author }}.jpg">
+    <h2 class="ui header">{{ meta.name }}
+        {% if meta.job is defined %}
+            <div class="ui sub header">{{ meta.job }}</div>
+        {% endif %}
+    </h2>
+    <h4 class="ui header>">About me</h4>
+    {{ content }}
+    <h4 class="ui header">Contact me</h4>
+    <div class="ui small grey basic labels">
+        {% if meta.email is defined %}
+        <a class="ui label" href="mailto:{{ meta.email }}">
+            <i class="mail icon"></i>Email
+        </a>
+        {% endif %}
+        {% if meta.twitter is defined %}
+        <a class="ui label" href="https://twitter.com/{{ meta.twitter }}">
+            <i class="twitter icon"></i>Twitter
+        </a>
+        {% endif %}
+        {% if meta.stackexchange is defined %}
+        <a class="ui label" href="{{ meta.stackexchange }}">
+            <i class="stack exchange icon"></i>Stack Exchange
+        </a>
+        {% endif %}
+        {% if meta.instagram is defined %}
+        <a class="ui label" href="https://www.instagram.com/{{ meta.instagram }}">
+            <i class="instagram icon"></i>Instagram
+        </a>
+        {% endif %}
+        {% if meta.github is defined %}
+        <a class="ui label" href="https://github.com/{{ meta.github }}">
+            <i class="github alternate icon"></i>GitHub
+        </a>
+        {% endif %}
+        {% if meta.flickr is defined %}
+        <a class="ui label" href="https://www.flickr.com/photos/{{ meta.flickr }}">
+            <i class="flickr icon""></i>Flickr
+        </a>
+        {% endif %}
+        {% if meta.facebook is defined %}
+        <a class="ui label" href="https://www.facebook.com/{{ meta.facebook }}">
+            <i class="flickr icon""></i>Facebook
+        </a>
+        {% endif %}
+    </div>
+{% endblock %}

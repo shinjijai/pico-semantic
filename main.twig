@@ -1,0 +1,169 @@
+{% extends "base.twig" %}
+{% block css %}
+    <style type="text/css">
+        .hidden.menu {
+            display: none;
+        }
+        .masthead.segment {
+            min-height: 700px;
+            padding: 1em 0em;
+        }
+        .masthead .logo.item img {
+            margin-right: 1em;
+        }
+        .masthead .ui.menu .ui.button {
+            margin-left: 0.5em;
+        }
+       .masthead h1.ui.header {
+            margin-top: 3em;
+            margin-bottom: 0em;
+            font-size: 4em;
+            font-weight: normal;
+        }
+        .masthead h2 {
+            font-size: 1.7em;
+            font-weight: normal;
+        }
+        .masthead {
+            background-color: {{ config.semantic_alt_color }} !important;
+        }
+        .ui.inverted.vertical.masthead.center {
+            background-image: url({{ base_url }}/assets/background.png);
+            background-repeat: no-repeat;
+	    background-size: 100% 100%;
+            background-position: center;
+        }
+        .ui.vertical.stripe {
+            padding: 8em 0em;
+        }
+        .ui.vertical.stripe h3 {
+            font-size: 2em;
+        }
+        .ui.vertical.stripe .button + h3,
+        .ui.vertical.stripe p + h3 {
+            margin-top: 3em;
+        }
+        .ui.vertical.stripe .floated.image {
+            clear: both;
+        }
+        .ui.vertical.stripe p {
+            font-size: 1.33em;
+        }
+        .ui.vertical.stripe .horizontal.divider {
+            margin: 3em 0em;
+        }
+        .quote.stripe.segment {
+            padding: 0em;
+        }
+        .quote.stripe.segment .grid .column {
+            padding-top: 5em;
+            padding-bottom: 5em;
+        }
+        .secondary.pointing.menu .toc.item {
+            display: none;
+        }
+        .ui.secondary.pointing.menu {
+            border-style: none;
+        }
+        @media only screen and (max-width: 700px) {
+            .ui.fixed.menu {
+                display: none !important;
+            }
+            .secondary.pointing.menu .item,
+            .secondary.pointing.menu .menu {
+                display: none;
+            }
+            .secondary.pointing.menu .toc.item {
+                display: block;
+            }
+            .masthead.segment {
+                min-height: 350px;
+            }
+            .masthead h1.ui.header {
+                font-size: 2em;
+                margin-top: 1.5em;
+            }
+            .masthead h2 {
+                margin-top: 0.5em;
+                font-size: 1.5em;
+            }
+        }
+  </style>
+{% endblock %}
+{% block menu %}
+        <!-- Following menu -->
+        <div class="ui huge inverted {{ config.semantic_color }} stackable fixed hidden borderless menu">
+            <div class="ui header item">{{ site_title }}</div>
+            <a class="item menu_item home_item" href="{{ index|link }}">
+                <i class="home icon"></i>
+            </a>
+            {% for page in pages|sort %}
+                {% if page.meta['menu'] is defined %}
+                    <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                {% endif %}
+            {% endfor %}
+            <!-- <div class="right menu">
+                <a class="item">
+                    <i class="sidebar icon"></i>
+                </a>
+            </div> -->
+        </div>
+        <!-- End of following menu -->
+        <!-- TOC menu -->
+        <div class="ui inverted vertical masthead center aligned segment">
+            <div class="ui container">
+                <div class="ui huge secondary inverted borderless pointing menu">
+                    <a class="item menu_item home_item" href="{{ index|link }}">
+                        <i class="home icon"></i>
+                    </a>
+                    {% for page in pages|sort %}
+                        {% if page.meta['menu'] is defined %}
+                            <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="ui text container">
+                <h1 class="ui inverted header">
+                    stephen lam
+                </h1>
+                <h2>{{ site_title }}</h2>
+            </div>
+        </div>
+        <!-- End TOC menu -->
+{% endblock %}
+{% block main_content %}
+    {% for page in paged_pages if page.title %}
+        <div class="ui medium header">{{ page.title }}
+            <div class="ui tiny label">
+                <i class="icon calendar"></i>{{ page.date|date("l, Y-m-d") }}
+            </div>
+        </div>
+        <div class="ui hidden fitted divider"></div>
+            {{ page.id|content }}
+        <a href="{{ page.url }}">
+            <div class="ui animated mini {{ config.semantic_color }} button" tabindex="0"> 
+                <div class="visible content">READ</div>
+                <div class="hidden content">MORE</div>
+            </div>
+        </a>
+        <div class="ui hidden divider"></div>
+    {% endfor %}
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+    // fix menu when passed
+        $('.masthead')
+            .visibility({
+                once: false,
+                onBottomPassed: function() {
+                $('.fixed.menu').transition('fade in');
+            },
+                onBottomPassedReverse: function() {
+                $('.fixed.menu').transition('fade out');
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+    {% if meta.description %}
+        <meta name="description" content="{{ meta.description|striptags }}">
+    {% endif %}{% if meta.robots %}
+        <meta name="robots" content="{{ meta.robots }}">
+    {% endif %}
+
+    <link rel="stylesheet" href="{{ theme_url }}/semantic.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{ theme_url }}/components/divider.min.css" type="text/css" />
+    <style type="text/css">
+        body {
+            background-color: #EEEEEE;
+        }
+    </style>
+    <!-- CSS block area to add custom/additional CSS if required-->
+    {% block css %}{% endblock %}
+</head>
+<body>
+    {% block menu %}
+        <!-- Menu -->
+        <div class="ui huge inverted {{ config.semantic_color }} stackable borderless menu">
+            <div class="ui header item">{{ site_title }}</div>
+            <a class="item menu_item" id="home_item" href="{{ index|link }}">
+                <i class="home icon"></i>
+            </a>
+            {% for page in pages|sort %}
+                {% if page.meta['menu'] is defined %}
+                    <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                {% endif %}
+            {% endfor %}
+            <!-- <div class="right menu">
+                <a class="item">
+                    <i class="sidebar icon"></i>
+                </a>
+            </div> -->
+        </div>
+        <!-- End of menu -->
+    {% endblock %}
+    <!-- Main content -->
+    <div class="ui container stackable"> 
+        <div class="ui hidden divider"></div>
+        {% block main_content %}{% endblock %}
+    </div>
+    <!-- Footer -->
+    <div class="ui inverted {{ config.semantic_color }} footer segment">
+        <div class="ui left aligned stackable container">
+            copyright © 2016 
+                {% if 'now'|date('U') > '2017-01-01'|date('U') %} 
+                - {{ 'now'|date('Y') }}
+                {% endif %} stephen lam
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="{{ theme_url }}/semantic.min.js"></script>
+    <!-- Script block area to add custom/additional JS if required-->
+    {% block script %}{% endblock %}
+    <!-- Add active class to current page in menu -->
+    <script>
+        $(document).ready(function(){
+            var current = location.pathname.split( '/' );
+            $('.menu_item').each(function(){
+                var $this = $(this);
+                // if the current path is like this link, make it active, else make #home_menu active
+                if(current[1].length < 1){
+                    $(".home_item").addClass('active');
+                }
+                else if($this.attr('href').indexOf(current[1]) !== -1){
+                    $this.addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

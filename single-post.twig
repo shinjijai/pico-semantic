@@ -1,0 +1,30 @@
+{% extends "base.twig" %}
+{% block main_content %}
+    <div class="ui medium header">{{ meta.title }}
+        <div class="ui tiny label">
+            <i class="icon calendar"></i>{{ meta.date|date("l, Y-m-d") }}
+        </div>
+    </div>
+    <div class="ui hidden fitted divider"></div>
+        {{ content }}
+    <div class="ui container stackable">
+        <div class="ui grid">
+        	<div class="eight wide column">
+                <div class="ui animated mini {{ config.semantic_alt_color }} button" id="back_btn">
+                    <div class="visible content"><i class="arrow left icon"></i></div>
+                    <div class="hidden content">BACK</div>
+                </div>
+	        </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function(){
+        $("#back_btn").click(function(){
+            parent.history.back();
+            return false;
+        });
+    });
+</script>
+{% endblock %}

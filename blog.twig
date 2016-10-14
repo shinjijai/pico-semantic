@@ -1,0 +1,39 @@
+{% extends "base.twig" %}
+{% block main_content %}
+    {% for page in paged_pages if page.title %}
+        <div class="ui medium header">{{ page.title }}
+            <div class="ui tiny label">
+                <i class="icon calendar"></i>{{ page.date|date("l, Y-m-d") }}
+            </div>
+        </div>
+        <div class="ui hidden fitted divider"></div>
+            {{ page.id|content }}
+        <a href="{{ page.url }}">
+            <div class="ui animated mini {{ config.semantic_color }} button" tabindex="0"> 
+                <div class="visible content">READ</div>
+                <div class="hidden content">MORE</div>
+            </div>
+        </a>
+        <div class="ui hidden divider"></div>
+    {% endfor %}
+    <div class="ui container stackable">
+        <div class="ui mini {{ config.semantic_alt_color }} buttons">
+        {% if page_number < total_pages %}
+            <a href="{{ base_url }}/{{ page_indicator }}/{{ page_number + 1 }}">
+                <button class="ui icon button">
+                    <i class="arrow left icon"></i>
+                    OLDER
+                </button>
+            </a>
+        {% endif %}
+        {% if page_number > 1 %}
+            <a href="{{ base_url }}/{{ page_indicator }}/{{ page_number - 1 }}">
+                <button class="ui icon button">
+                    NEWER
+                    <i class="arrow right icon"></i>
+                </button>
+            </a>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
