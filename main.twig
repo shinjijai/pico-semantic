@@ -157,12 +157,11 @@
             </div>
         </div>
         <div class="ui hidden fitted divider"></div>
-            {{ page.id|content }}
-        <a href="{{ page.url }}">
-            <div class="ui animated mini {{ config.semantic_color }} button" tabindex="0"> 
-                <div class="visible content">READ</div>
-                <div class="hidden content">MORE</div>
-            </div>
+        {{ page.id|content|length > config.semantic_post_shorten  ? page.id|content|slice(0, config.semantic_post_shorten) ~ '...' : page.id|content }}
+        <div class="ui hidden fitted divider"></div>
+        <a href="{{ page.url }}" class="ui animated mini {{ config.semantic_color }} button" tabindex="0"> 
+            <div class="visible content">READ</div>
+            <div class="hidden content">MORE</div>
         </a>
         <div class="ui hidden divider"></div>
     {% endfor %}
