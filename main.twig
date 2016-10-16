@@ -109,28 +109,45 @@
             </div> -->
         </div>
         <!-- End of following menu -->
-        <!-- TOC menu -->
-        <div class="ui inverted vertical masthead center aligned segment">
-            <div class="ui container">
-                <div class="ui huge secondary inverted borderless pointing menu">
-                    <a class="item menu_item home_item" href="{{ index|link }}">
-                        <i class="home icon"></i>
-                    </a>
-                    {% for page in pages|sort %}
-                        {% if page.meta['menu'] is defined %}
-                            <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="ui text container">
-                <h1 class="ui inverted header">
-                    stephen lam
-                </h1>
-                <h2>{{ site_title }}</h2>
+        <!-- Sidebar menu -->
+        <div class="ui vertical inverted sidebar menu">
+            <a class="item menu_item home_item" href="{{ index|link }}">
+                <i class="home icon"></i>home
+            </a>
+            {% for page in pages|sort %}
+                {% if page.meta['menu'] is defined %}
+                    <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- End of side menu -->
+{% endblock %}
+{% block mast_header %}
+    <!-- Top menu -->
+    <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui container">
+            <div class="ui huge secondary inverted borderless pointing menu">
+                <a class="toc item">
+                    <i class="sidebar icon"></i>
+                </a>
+                <a class="item menu_item home_item" href="{{ index|link }}">
+                    <i class="home icon"></i>
+                </a>
+                {% for page in pages|sort %}
+                    {% if page.meta['menu'] is defined %}
+                        <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
-        <!-- End TOC menu -->
+        <div class="ui text container">
+            <h1 class="ui inverted header">
+                stephen lam
+            </h1>
+            <h2>{{ site_title }}</h2>
+        </div>
+    </div>
+    <!-- End top menu -->
 {% endblock %}
 {% block main_content %}
     {% for page in paged_pages if page.title %}
@@ -151,6 +168,7 @@
     {% endfor %}
 {% endblock %}
 {% block script %}
+<script src="{{ theme_url }}/sidebar.js"></script>
 <script>
     $(document).ready(function(){
     // fix menu when passed
@@ -164,6 +182,9 @@
                 $('.fixed.menu').transition('fade out');
             }
         });
+        // create sidebar and attach to menu open
+        $('.ui.sidebar')
+            .sidebar('attach events', '.toc.item');
     });
 </script>
 {% endblock %}

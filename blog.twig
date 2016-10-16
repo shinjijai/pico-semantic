@@ -19,19 +19,18 @@
     <div class="ui container stackable">
         <div class="ui mini {{ config.semantic_alt_color }} buttons">
         {% if page_number < total_pages %}
-            <a href="{{ base_url }}/{{ page_indicator }}/{{ page_number + 1 }}">
-                <button class="ui icon button">
-                    <i class="arrow left icon"></i>
-                    OLDER
-                </button>
+            <a href="{{ base_url }}/{{ page_indicator }}/{{ page_number + 1 }}" class="ui icon button">
+                <i class="arrow left icon"></i>
+                OLDER
             </a>
         {% endif %}
+            <div class="ui {{ config.semantic_alt_color }} button">
+            {{ page_number }} of {{ total_pages }}
+            </div>
         {% if page_number > 1 %}
-            <a href="{{ base_url }}/{{ page_indicator }}/{{ page_number - 1 }}">
-                <button class="ui icon button">
-                    NEWER
-                    <i class="arrow right icon"></i>
-                </button>
+            <a href="{{ base_url }}/{{ page_indicator }}/{{ page_number - 1 }}" class="ui icon button">
+                NEWER
+                <i class="arrow right icon"></i>
             </a>
         {% endif %}
         </div>
