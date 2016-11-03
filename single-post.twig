@@ -1,29 +1,37 @@
 {% extends "base.twig" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ theme_url }}/highlight/style/rainbow.css" type="text/css">
+{% endblock %}
 {% block main_content %}
     <div class="ui medium header">{{ meta.title }}
         <div class="ui tiny label">
-            <i class="icon calendar"></i>{{ meta.date|date("l, Y-m-d") }}
+            <i class="icon calendar"></i>{{ meta.date|date(config.semantic_date_format)|upper }}
         </div>
     </div>
     <div class="ui hidden fitted divider"></div>
         {{ content }}
     <div class="ui container stackable">
         <div class="ui grid">
-        	<div class="eight wide column">
+            <div class="eight wide column">
                 <div class="ui animated mini {{ config.semantic_alt_color }} button" id="back_btn">
                     <div class="visible content"><i class="arrow left icon"></i></div>
                     <div class="hidden content">BACK</div>
                 </div>
-	        </div>
+            </div>
         </div>
     </div>
 {% endblock %}
 {% block script %}
+<script src="{{ theme_url }}/highlight/highlight.pack.js"></script>
 <script>
     $(document).ready(function(){
         $("#back_btn").click(function(){
             parent.history.back();
             return false;
+        });
+        $("code").addClass('{{ meta.prglang }}');
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
         });
     });
 </script>

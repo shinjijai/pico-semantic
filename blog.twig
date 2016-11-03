@@ -3,11 +3,12 @@
     {% for page in paged_pages if page.title %}
         <div class="ui medium header">{{ page.title }}
             <div class="ui tiny label">
-                <i class="icon calendar"></i>{{ page.date|date("l, Y-m-d") }}
+                <i class="icon calendar"></i>{{ page.date|date(config.semantic_date_format)|upper }}
             </div>
         </div>
         <div class="ui hidden fitted divider"></div>
-            {{ page.id|content }}
+            {{ config.semantic_post_shorten == 0 ? page.id|content : page.id|content|slice(0, config.semantic_post_shorten) ~ '...' }}
+        <div class="ui hidden fitted divider"></div>
         <a href="{{ page.url }}">
             <div class="ui animated mini {{ config.semantic_color }} button" tabindex="0"> 
                 <div class="visible content">READ</div>

@@ -1,4 +1,4 @@
-{% extends "base.twig" %}
+{% extends "blog.twig" %}
 {% block css %}
     <style type="text/css">
         .hidden.menu {
@@ -150,24 +150,10 @@
     <!-- End top menu -->
 {% endblock %}
 {% block main_content %}
-    {% for page in paged_pages if page.title %}
-        <div class="ui medium header">{{ page.title }}
-            <div class="ui tiny label">
-                <i class="icon calendar"></i>{{ page.date|date("l, Y-m-d") }}
-            </div>
-        </div>
-        <div class="ui hidden fitted divider"></div>
-        {{ page.id|content|length > config.semantic_post_shorten  ? page.id|content|slice(0, config.semantic_post_shorten) ~ '...' : page.id|content }}
-        <div class="ui hidden fitted divider"></div>
-        <a href="{{ page.url }}" class="ui animated mini {{ config.semantic_color }} button" tabindex="0"> 
-            <div class="visible content">READ</div>
-            <div class="hidden content">MORE</div>
-        </a>
-        <div class="ui hidden divider"></div>
-    {% endfor %}
+   {{ parent() }}
 {% endblock %}
 {% block script %}
-<script src="{{ theme_url }}/sidebar.js"></script>
+<script src="{{ theme_url }}/components/sidebar.js"></script>
 <script>
     $(document).ready(function(){
     // fix menu when passed
