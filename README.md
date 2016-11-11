@@ -22,6 +22,19 @@ Link: /users/stephen
 ---
 ```
 
+To add submenu for a specific menu item, you need to add `Sub:` in the `YAML` header. For example:
+```
+--- 
+Menu: about me 
+Tags: menu
+Link: /users/stephen 
+Sub:
+ Stephen: /users/stephen
+ Tony: /users/tony
+ Title: /link
+---
+```
+
 Where the `Menu` is the title of the menu item, `Tags` has to be `menu, and `Link` is base of {{ base_url }}. To order the menu location, name the menu files with in numeric order. For example 
 
 ```
