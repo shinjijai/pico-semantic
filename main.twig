@@ -99,14 +99,19 @@
             </a>
             {% for page in pages|sort %}
                 {% if page.meta['menu'] is defined %}
-                    <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                    {% if page.meta['sub'] is defined %}
+                        <div class="ui dropdown item">{{ page.meta['menu'] }}<i class="ui dropdown icon"></i>
+                            <div class="menu">
+                                {% for subtitle,sublink in page.meta['sub'] %}
+                                    <a class="item" href="{{ base_url }}{{ sublink }}">{{ subtitle }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
-            <!-- <div class="right menu">
-                <a class="item">
-                    <i class="sidebar icon"></i>
-                </a>
-            </div> -->
         </div>
         <!-- End of following menu -->
         <!-- Sidebar menu -->
@@ -116,7 +121,17 @@
             </a>
             {% for page in pages|sort %}
                 {% if page.meta['menu'] is defined %}
-                    <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                    {% if page.meta['sub'] is defined %}
+                        <div class="ui dropdown item">{{ page.meta['menu'] }}<i class="ui dropdown icon"></i>
+                            <div class="menu">
+                                {% for subtitle,sublink in page.meta['sub'] %}
+                                    <a class="item" href="{{ base_url }}{{ sublink }}">{{ subtitle }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </div>
@@ -134,10 +149,20 @@
                     <i class="home icon"></i>
                 </a>
                 {% for page in pages|sort %}
-                    {% if page.meta['menu'] is defined %}
+                {% if page.meta['menu'] is defined %}
+                    {% if page.meta['sub'] is defined %}
+                        <div class="ui dropdown item">{{ page.meta['menu'] }}<i class="ui dropdown icon"></i>
+                            <div class="menu">
+                                {% for subtitle,sublink in page.meta['sub'] %}
+                                    <a class="item" href="{{ base_url }}{{ sublink }}">{{ subtitle }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
                         <a class="item menu_item" href="{{ base_url }}{{ page.meta['link'] }}">{{ page.meta['menu'] }}</a>
                     {% endif %}
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
         <div class="ui text container">
