@@ -122,7 +122,7 @@
             {% for page in pages|sort %}
                 {% if page.meta['menu'] is defined %}
                     {% if page.meta['sub'] is defined %}
-                        <div class="ui dropdown item">{{ page.meta['menu'] }}<i class="ui dropdown icon"></i>
+                        <div class="ui item">{{ page.meta['menu'] }}
                             <div class="menu">
                                 {% for subtitle,sublink in page.meta['sub'] %}
                                     <a class="item" href="{{ base_url }}{{ sublink }}">{{ subtitle }}</a>
