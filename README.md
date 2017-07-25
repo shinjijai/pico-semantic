@@ -1,4 +1,4 @@
-###Installation
+# Installation
 
 To enable this theme, edit the `config.php` to `$config['theme'] = 'semantic';`
 
@@ -10,7 +10,7 @@ Requires `PicoTags` plugins to properly use menu item and filter post depending 
 
 Requires [Pico-Pagination](https://github.com/rewdy/Pico-Pagination). 
 
-####How to use this
+## How to use this
 
 Menu items are created from `.md` files that have the following `YAML` info
 
