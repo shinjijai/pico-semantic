@@ -14,16 +14,16 @@ Requires [Pico-Pagination](https://github.com/rewdy/Pico-Pagination).
 
 Menu items are created from `.md` files that have the following `YAML` info
 
-```
+````yaml
 --- 
 Menu: about me 
 Tags: menu
 Link: /users/stephen 
 ---
-```
+````
 
 To add submenu for a specific menu item, you need to add `Sub:` in the `YAML` header. For example:
-```
+````yaml
 --- 
 Menu: about me 
 Tags: menu
@@ -33,19 +33,19 @@ Sub:
  Tony: /users/tony
  Title: /link
 ---
-```
+````
 
 Where the `Menu` is the title of the menu item, `Tags` has to be `menu, and `Link` is base of {{ base_url }}. To order the menu location, name the menu files with in numeric order. For example 
 
-```
+````
 05-blog.md
 10-aboutme.md
 15-fun.md
-```
+````
 
 For blog, create a new `blog` folder under `content`. The `index.md` in that location should have the following as an example
 
-```
+````yaml
 ---
 Title: blog
 Filter: blog, menu
@@ -53,7 +53,7 @@ Author: stephen
 Date: 10 September 2016
 Template: blog
 ---
-```
+````
 
 Each new blog post should have the Tags of `blog`. 
 
