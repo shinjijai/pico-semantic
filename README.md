@@ -35,7 +35,7 @@ Sub:
 ---
 ````
 
-Where the `Menu` is the title of the menu item, `Tags` has to be `menu, and `Link` is base of {{ base_url }}. To order the menu location, name the menu files with in numeric order. For example 
+Where the `Menu` is the title of the menu item, `Tags` has to be `menu`, and `Link` is base of {{ base_url }}. To order the menu location, name the menu files with in numeric order. For example 
 
 ````
 05-blog.md
